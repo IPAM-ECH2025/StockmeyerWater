@@ -49,3 +49,6 @@ main-debug
 *.bin
 output.txt
 error.txt
+
+#MacOS files
+.DS_Store
