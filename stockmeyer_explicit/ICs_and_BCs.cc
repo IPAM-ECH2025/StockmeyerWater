@@ -27,7 +27,7 @@ void CustomPDE<dim, degree, number>::set_initial_condition(
     // Coordinate x = y
     double y = point[0];
     double theta = point[1];
-    double omega = point[2] * omega_max / pi - omega_max;
+    double omega = point[2] * omega_max / pi;
 
     // ICs_1: Product of Gaussian functions in theta and omega, no y-dependence
     double sigma = sigma_s;
@@ -35,7 +35,7 @@ void CustomPDE<dim, degree, number>::set_initial_condition(
                 std::exp(-omega * omega / (2.0 * sigma * sigma));
     f0 = f0 / (4.0 * pi * pi);
     f0 = f0 / (1.0 / (std::sqrt(2.0 * pi) * 0.1 * 2.0 * pi)) *
-         std::exp(-(theta - pi) * (theta - pi) / (0.02 * 4.0 * pi * pi));
+         std::exp(-theta * theta / (0.02 * 4.0 * pi * pi));
 
     // ICs_2: No theta dependence, Gaussian distribution in omega with
     // y-dependent sigma

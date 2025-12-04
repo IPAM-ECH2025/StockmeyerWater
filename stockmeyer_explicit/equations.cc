@@ -13,7 +13,7 @@ PRISMS_PF_BEGIN_NAMESPACE
 
 void CustomAttributeLoader::load_variable_attributes() {
   set_variable_name(0, "f");
-  set_variable_type(0, Scalar);
+  set_variable_type(0, FieldInfo::TensorRank::Scalar);
   set_variable_equation_type(0, ExplicitTimeDependent);
   set_dependencies_value_term_rhs(0, "f");
   set_dependencies_gradient_term_rhs(0, "grad(f)");

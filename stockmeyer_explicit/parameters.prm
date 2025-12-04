@@ -15,6 +15,9 @@ subsection Rectangular mesh
   set x size = 6.283185307179586
   set y size = 6.283185307179586
   set z size = 6.283185307179586
+	set x lower bound = -3.14159265359
+	set y lower bound = -3.14159265359
+	set z lower bound = -3.14159265359
   set x subdivisions = 1
   set y subdivisions = 1
   set z subdivisions = 1
