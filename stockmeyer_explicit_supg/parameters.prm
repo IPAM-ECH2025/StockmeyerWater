@@ -1,8 +1,8 @@
 # The dimension in the problem
-set dim = 3
+set dim = 2
 
 # The initial global refinement
-set global refinement = 6
+set global refinement = 7
 
 # The element degree
 set degree = 2
@@ -15,7 +15,7 @@ subsection Rectangular mesh
   set x size = 6.283185307179586
   set y size = 6.283185307179586
   set z size = 6.283185307179586
-	set x lower bound = 0
+	set x lower bound = -3.14159265359
 	set y lower bound = -3.14159265359
 	set z lower bound = -3.14159265359
   set x subdivisions = 1
@@ -24,10 +24,10 @@ subsection Rectangular mesh
 end
 
 # The timestep
-set time step = 1.0e-3
+set time step = 1.0e-4
 
-# The total number of timesteps to take
-set number steps = 3000
+# Total time
+set end time = 5
 
 # The number of ouputs and the frequency at which they output. The potential options
 # for the type of output are: EQUAL_SPACING, LOG_SPACING, and N_PER_DECADE. 
@@ -43,7 +43,14 @@ end
 # specified following the colon in Dirichlet: 1.0. NonuniformDirichlet and 
 # TimeDependentNonuniformDirichlet boundary conditions are specified in the ICs_and_BCs.cc 
 # files.
-set boundary condition for f = Periodic, Periodic, Periodic, Periodic, Dirichlet: 0.0, Dirichlet: 0.0
+
+# 3D case
+# set boundary condition for f = Periodic, Periodic, Periodic, Periodic, Dirichlet: 0.0, Dirichlet: 0.0
+
+# 2D case
+set boundary condition for f = Periodic
+
+
 
 # Linear solve parameters
 subsection linear solver parameters: f

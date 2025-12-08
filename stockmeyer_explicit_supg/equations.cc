@@ -77,6 +77,41 @@ void CustomPDE<dim, degree, number>::compute_nonexplicit_rhs(
       variable_list.set_value_term(0, residual);
       variable_list.set_gradient_term(0, -residual * stabilization_parameter *
                                              velocity);
+    } else if constexpr (dim == 2) {
+      ScalarValue theta = q_point_loc[0];
+      ScalarValue omega = q_point_loc[1];
+
+      ScalarGrad f_grad = variable_list.template get_gradient<ScalarGrad>(0);
+
+      // The components of the vector perpendicular to the normal vector
+      ScalarGrad orthonormal;
+      orthonormal[0] = -std::sin(theta);
+      orthonormal[1] = std::cos(theta);
+
+      // Electric field
+      ScalarGrad E;
+      E[0] = E_x_0 + 0.0 * std::sin(dt);
+      E[1] = E_y_0 + 0.0 * std::cos(dt);
+
+      // TODO: Add G term here
+      ScalarGrad G;
+      G = 0.0 * G;
+
+      // Create a vector for the velocity
+      ScalarGrad velocity;
+      velocity[0] = -omega;
+      velocity[1] = -(nu_3 * G - nu_4 * E) * orthonormal;
+
+      // Compute the stabilization parameter
+      ScalarValue stabilization_parameter =
+          compute_stabilization_parameter(velocity, element_volume);
+
+      // Compute the residual
+      ScalarValue residual = dt * velocity * f_grad;
+
+      variable_list.set_value_term(0, residual);
+      variable_list.set_gradient_term(0, -residual * stabilization_parameter *
+                                             velocity);
     }
   }
 }
@@ -118,6 +153,38 @@ void CustomPDE<dim, degree, number>::compute_nonexplicit_lhs(
       velocity[0] = 0.0;
       velocity[1] = -omega;
       velocity[2] = -(nu_3 * G - nu_4 * E) * orthonormal;
+
+      // Compute the stabilization parameter
+      ScalarValue stabilization_parameter =
+          compute_stabilization_parameter(velocity, element_volume);
+
+      variable_list.set_value_term(0, f_change, Change);
+      variable_list.set_gradient_term(
+          0, -f_change * stabilization_parameter * velocity, Change);
+    } else if constexpr (dim == 2) {
+      ScalarValue theta = q_point_loc[0];
+      ScalarValue omega = q_point_loc[1];
+
+      ScalarValue f_change =
+          variable_list.template get_value<ScalarValue>(0, Change);
+      // The components of the vector perpendicular to the normal vector
+      ScalarGrad orthonormal;
+      orthonormal[0] = -std::sin(theta);
+      orthonormal[1] = std::cos(theta);
+
+      // Electric field
+      ScalarGrad E;
+      E[0] = E_x_0 + 0.0 * std::sin(dt);
+      E[1] = E_y_0 + 0.0 * std::cos(dt);
+
+      // TODO: Add G term here
+      ScalarGrad G;
+      G = 0.0 * G;
+
+      // Create a vector for the velocity
+      ScalarGrad velocity;
+      velocity[0] = -omega;
+      velocity[1] = -(nu_3 * G - nu_4 * E) * orthonormal;
 
       // Compute the stabilization parameter
       ScalarValue stabilization_parameter =

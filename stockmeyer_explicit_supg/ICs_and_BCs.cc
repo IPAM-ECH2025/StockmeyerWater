@@ -43,6 +43,22 @@ void CustomPDE<dim, degree, number>::set_initial_condition(
 
       scalar_value =
           exponential_prefactor * exponential_term * some_extra_terms_idk;
+    } else if constexpr (dim == 2) {
+
+      auto theta = point[0];
+      auto omega = point[1];
+
+      auto exponential_term =
+          std::exp(-omega * omega / (2.0 * sigma_star * sigma_star));
+      auto exponential_prefactor = 1.0 / (std::sqrt(2.0 * M_PI) * sigma_star);
+
+      auto some_extra_terms_idk =
+          1.0 / (4.0 * M_PI * M_PI) /
+          (1.0 / (std::sqrt(2.0 * M_PI) * 0.1 * 2.0 * M_PI)) *
+          std::exp(-theta * theta / (0.02 * 4.0 * M_PI * M_PI));
+
+      scalar_value =
+          exponential_prefactor * exponential_term * some_extra_terms_idk;
     }
   }
 }
