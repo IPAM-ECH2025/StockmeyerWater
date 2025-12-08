@@ -149,7 +149,7 @@ private:
   /**
    * @brief Compute the stabilization paramters
    */
-  ScalarValue
+  inline ScalarValue
   compute_stabilization_parameter(const VectorValue &velocity,
                                   const ScalarValue &element_volume) const {
     // Norm of the local velocity

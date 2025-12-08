@@ -27,7 +27,7 @@ end
 set time step = 1.0e-3
 
 # The total number of timesteps to take
-set number steps = 5000
+set number steps = 1000
 
 # The number of ouputs and the frequency at which they output. The potential options
 # for the type of output are: EQUAL_SPACING, LOG_SPACING, and N_PER_DECADE. 

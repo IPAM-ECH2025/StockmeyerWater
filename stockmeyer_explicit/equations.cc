@@ -27,7 +27,7 @@ void CustomPDE<dim, degree, number>::compute_explicit_rhs(
     [[maybe_unused]] const dealii::VectorizedArray<number> &element_volume,
     [[maybe_unused]] Types::Index solve_block) const {
   if constexpr (dim == 3) {
-    ScalarValue y = q_point_loc[0];
+    // ScalarValue y = q_point_loc[0];
     ScalarValue theta = q_point_loc[1];
     ScalarValue omega = q_point_loc[2];
 
@@ -54,8 +54,6 @@ void CustomPDE<dim, degree, number>::compute_explicit_rhs(
     velocity[0] = 0.0;
     velocity[1] = -omega;
     velocity[2] = -(nu_3 * G - nu_4 * E) * orthonormal;
-
-    // u[2] = nu4 * Edotnn * (pi / omega_max);
 
     variable_list.set_value_term(0, f);
     variable_list.set_gradient_term(0, -dt * velocity * f);

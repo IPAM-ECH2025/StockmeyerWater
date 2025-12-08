@@ -27,7 +27,7 @@ end
 set time step = 1.0e-3
 
 # The total number of timesteps to take
-set number steps = 5000
+set number steps = 3000
 
 # The number of ouputs and the frequency at which they output. The potential options
 # for the type of output are: EQUAL_SPACING, LOG_SPACING, and N_PER_DECADE. 
@@ -44,6 +44,14 @@ end
 # TimeDependentNonuniformDirichlet boundary conditions are specified in the ICs_and_BCs.cc 
 # files.
 set boundary condition for f = Periodic, Periodic, Periodic, Periodic, Dirichlet: 0.0, Dirichlet: 0.0
+
+# Linear solve parameters
+subsection linear solver parameters: f
+  set tolerance type = AbsoluteResidual
+  set tolerance value = 1.0e-8
+  set max iterations = 1000
+  set preconditioner type = None
+end
 
 # Model constants that are defined and accessed through CustomPDE. These constants 
 # are particular useful when defining system parameters that you may sweep over.
