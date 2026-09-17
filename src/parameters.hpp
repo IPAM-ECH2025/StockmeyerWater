@@ -7,22 +7,24 @@ template <typename RealType> struct Parameters {
   /*
    * Spatial discretization parameters
    */
-  static constexpr int N_x = 128; // Corresponds to y
-  static constexpr int N_y = 128; // Corresponds to \theta
-  static constexpr int N_z = 128; // Corresponds to \omega
-  static constexpr RealType L_x_lower = -std::numbers::pi;
-  static constexpr RealType L_y_lower = -std::numbers::pi;
-  static constexpr RealType L_z_lower = -std::numbers::pi;
-  static constexpr RealType L_x_upper = std::numbers::pi;
+  static constexpr int N_y = 64;
+  static constexpr int N_theta = 128;
+  static constexpr int N_omega = 128;
+  static constexpr RealType L_y_lower = 0.0;
+  static constexpr RealType L_theta_lower = -std::numbers::pi;
+  static constexpr RealType L_omega_lower = -4.0 * std::numbers::pi;
   static constexpr RealType L_y_upper = std::numbers::pi;
-  static constexpr RealType L_z_upper = std::numbers::pi;
+  static constexpr RealType L_theta_upper = std::numbers::pi;
+  static constexpr RealType L_omega_upper = 4.0 * std::numbers::pi;
 
-  static constexpr RealType dx = (L_x_upper - L_x_lower) / RealType(N_x);
   static constexpr RealType dy = (L_y_upper - L_y_lower) / RealType(N_y);
-  static constexpr RealType dz = (L_z_upper - L_z_lower) / RealType(N_z);
+  static constexpr RealType dtheta =
+      (L_theta_upper - L_theta_lower) / RealType(N_theta);
+  static constexpr RealType domega =
+      (L_omega_upper - L_omega_lower) / RealType(N_omega);
 
-  static constexpr int n_points = N_x * N_y * N_z;
-  static constexpr int n_cells = (N_x - 1) * (N_y - 1) * (N_z - 1);
+  static constexpr int n_points = N_y * N_theta * N_omega;
+  static constexpr int n_cells = (N_y - 1) * (N_theta - 1) * (N_omega - 1);
 
   /**
    * Temporal discretization parameters
