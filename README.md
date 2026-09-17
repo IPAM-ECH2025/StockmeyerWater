@@ -12,7 +12,6 @@ The project can then be configured as you would with Kokkos. For example, with O
 
 ```
 cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_OPENMP=ON -B build
-
 ```
 
 ```
