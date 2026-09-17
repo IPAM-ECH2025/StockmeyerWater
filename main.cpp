@@ -60,7 +60,9 @@ public:
     Real time = 0.0;
 
     for (int step = 0; step <= P::n_steps; ++step) {
-      print_solution(step, time);
+      if (step % P::output_stride == 0) {
+        print_solution(step, time);
+      }
 
       if (step == P::n_steps) {
         break;
