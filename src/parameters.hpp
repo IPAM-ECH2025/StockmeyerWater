@@ -30,7 +30,7 @@ template <typename RealType> struct Parameters {
    * Temporal discretization parameters
    */
   static constexpr RealType dt = 0.005;
-  static constexpr RealType t_final = 100 * dt; // 10.0;
+  static constexpr RealType t_final = 1000 * dt; // 10.0;
 
   static constexpr auto n_steps = (int)std::ceil(t_final / dt);
 
@@ -48,4 +48,9 @@ template <typename RealType> struct Parameters {
   static constexpr RealType E_x = -1.0;
   static constexpr RealType E_y = 0.0;
   static constexpr RealType delta = 1.0; // Japanese bracket regularization
+
+  /**
+   * Output parameters
+   */
+  static constexpr int output_stride = 100;
 };
