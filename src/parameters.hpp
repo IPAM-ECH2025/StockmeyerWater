@@ -45,12 +45,12 @@ template <typename RealType> struct Parameters {
    */
   static constexpr RealType gamma_3 = 22.0;
   static constexpr RealType gamma_4 = 28.0;
-  static constexpr RealType E_x = -1.0;
-  static constexpr RealType E_y = 0.0;
+  static constexpr RealType E_x = 0.0;
+  static constexpr RealType E_y = 1.0;
   static constexpr RealType delta = 1.0; // Japanese bracket regularization
 
   /**
    * Output parameters
    */
-  static constexpr int output_stride = 100;
+  static constexpr int output_stride = 10;
 };
