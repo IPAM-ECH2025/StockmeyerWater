@@ -3,12 +3,6 @@
 #include "parameters.hpp"
 #include <Kokkos_Core.hpp>
 
-template <typename RealType>
-KOKKOS_INLINE_FUNCTION RealType japanese_bracket(RealType x) {
-  return Kokkos::sqrt(x * x + Parameters<RealType>::delta *
-                                  Parameters<RealType>::delta);
-}
-
 template <typename RealType, typename ViewType>
 KOKKOS_FUNCTION RealType compute_integral(const ViewType &f) {
   // NOTE: This only works for 3D views
