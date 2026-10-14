@@ -43,11 +43,11 @@ template <typename RealType> struct Parameters {
   /**
    * Model parameters
    */
-  static constexpr RealType gamma_3 = 22.0;
-  static constexpr RealType gamma_4 = 28.0;
-  static constexpr RealType E_magnitude = 0.2;
+  static constexpr RealType gamma_3 = 0.2;
+  static constexpr RealType gamma_4 = 0.2;
+  static constexpr RealType E_magnitude = 1.0;
   static constexpr RealType E_angle = M_PI / 4.0;
-  static constexpr RealType delta = 1.0; // Japanese bracket regularization
+  static constexpr RealType delta = 0.001; // Japanese bracket regularization
 
   static constexpr RealType E_x = E_magnitude * std::cos(E_angle);
   static constexpr RealType E_y = E_magnitude * std::sin(E_angle);
