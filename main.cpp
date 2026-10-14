@@ -1,5 +1,3 @@
-#include "Kokkos_Array.hpp"
-#include "impl/Kokkos_Profiling.hpp"
 #include "src/functions.hpp"
 #include "src/output.hpp"
 #include "src/parameters.hpp"
