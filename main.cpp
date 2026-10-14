@@ -272,6 +272,8 @@ private:
                      1);
 
     // Omega advection
+    // NOTE: Using Orszag 2/3 rule for dealiasing
+    constexpr int omega_cutoff = (2 * (P::N_omega / 2 + 1)) / 3;
     KokkosFFT::rfft(Exec{}, f, f_hat_omega, KokkosFFT::Normalization::none, 2);
     Kokkos::parallel_for(
         "apply_omega_semigroup",
@@ -279,7 +281,10 @@ private:
         KOKKOS_CLASS_LAMBDA(const int i, const int j, const int k) {
           using Kokkos::cos;
           using Kokkos::sin;
-
+          if (k >= omega_cutoff) {
+            f_hat_omega(i, j, k) = Complex(0.0, 0.0);
+            return;
+          }
           const Real phase = -k_omega(k) * acceleration(i, j) * dt;
           f_hat_omega(i, j, k) *= Complex(cos(phase), sin(phase));
         });
