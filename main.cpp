@@ -107,8 +107,8 @@ private:
         return 1.0 / (sqrt(2.0 * M_PI) * sigma) *
                exp(-_omega * _omega / (2.0 * sigma * sigma));
     */
-    return exp(-8.0 * _omega * _omega) *
-           exp(-8.0 * (_theta - M_PI_4) * (_theta - M_PI_4));
+    return exp(-_omega * _omega) *
+           exp(-2.0 * (_theta + M_PI_4) * (_theta + M_PI_4));
   }
 
   void initial_condition() {
